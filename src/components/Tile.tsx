@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Improvement from "../models/Improvement";
 import AddImprovementDialog from "./AddImprovementDialog";
 import EditImprovementDialog from "./EditImprovementDialog";
@@ -9,11 +10,16 @@ interface Props {
 }
 
 const Tile = ({ tile, index }: Props) => {
+  const [add, setAdd] = useState(true);
+  const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (tile.type !== "") {
+      setAdd(false);
+    }
+  };
   return (
-    <div className="Tile">
+    <div className="Tile" onClick={(e) => handleClick(e)}>
       <i className="fa-solid fa-person"></i>
-      <AddImprovementDialog />
-      <EditImprovementDialog />
+      {add ? <AddImprovementDialog /> : <EditImprovementDialog />}
     </div>
   );
 };
