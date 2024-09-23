@@ -7,12 +7,14 @@ interface Props {
   enoughResources: (cost: Resources) => boolean;
   tile: Improvement;
   upgradeOrDowngradeImprovement: (string: string) => void;
+  removeImprovement: () => void;
 }
 
 const EditImprovementDialog = ({
   enoughResources,
   tile,
   upgradeOrDowngradeImprovement,
+  removeImprovement,
 }: Props) => {
   const checkOnUpgrade = () => {
     if (enoughResources(tile.cost)) {
@@ -24,6 +26,7 @@ const EditImprovementDialog = ({
       upgradeOrDowngradeImprovement("downgrade");
     }
   };
+
   console.log(tile);
   return (
     <div className="EditImprovementDialog">
@@ -34,7 +37,15 @@ const EditImprovementDialog = ({
           </button> /*We start adding buttons EX. Upgrade, Downgrade, Close, etc. */
         }
         {<button onClick={() => checkOnDowngrade()}>Downgrade</button>}
-        {<button onClick={() => {}}>Remove</button>}
+        {
+          <button
+            onClick={() => {
+              removeImprovement();
+            }}
+          >
+            Remove
+          </button>
+        }
         {<button onClick={() => {}}>Close</button>}
       </div>
     </div>

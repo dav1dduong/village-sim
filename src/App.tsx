@@ -605,7 +605,26 @@ function App() {
     setTiles((prev) => {
       let copy = prev.slice(0);
       if (copy[index].level === 1) {
-        copy.splice(index, 1);
+        copy[index] = {
+          type: "",
+          level: 0,
+          cost: {
+            people: 0,
+            gold: 0,
+            food: 0,
+            ore: 0,
+            weapon: 0,
+            armor: 0,
+          },
+          benefit: {
+            people: 0,
+            gold: 0,
+            food: 0,
+            ore: 0,
+            weapon: 0,
+            armor: 0,
+          },
+        };
       }
       editResources(copy);
       return copy;
@@ -614,13 +633,18 @@ function App() {
   console.log(tiles, resources);
   return (
     <>
-      <Map
-        tiles={tiles}
-        edit={editTile}
-        enoughResources={enoughResources}
-        upgradeOrDowngradeImprovement={upgradeOrDowngradeImprovement}
-      />
-      <ResourcesView resources={resources} />
+      <div className="map-container">
+        <Map
+          tiles={tiles}
+          edit={editTile}
+          enoughResources={enoughResources}
+          upgradeOrDowngradeImprovement={upgradeOrDowngradeImprovement}
+          removeImprovement={removeImprovement}
+        />
+      </div>
+      <div className="resources-container">
+        <ResourcesView resources={resources} />
+      </div>
     </>
   );
 }

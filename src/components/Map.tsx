@@ -8,6 +8,7 @@ interface Props {
   edit: (tile: Improvement, index: number) => void;
   enoughResources: (cost: Resources) => boolean;
   upgradeOrDowngradeImprovement: (index: number, string: string) => void;
+  removeImprovement: (index: number) => void;
 }
 
 const Map = ({
@@ -15,6 +16,7 @@ const Map = ({
   edit,
   enoughResources,
   upgradeOrDowngradeImprovement,
+  removeImprovement,
 }: Props) => {
   return (
     <div className="Map">
@@ -28,6 +30,7 @@ const Map = ({
               edit={edit}
               enoughResources={enoughResources}
               upgradeOrDowngradeImprovement={upgradeOrDowngradeImprovement}
+              removeImprovement={removeImprovement}
             />
           );
         })}

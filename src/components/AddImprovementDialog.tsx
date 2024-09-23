@@ -6,8 +6,9 @@ import Resources from "../models/Resources";
 interface Props {
   edit: (tile: Improvement) => void;
   enoughResources: (cost: Resources) => boolean;
+  index: number;
 }
-const AddImprovementDialog = ({ edit, enoughResources }: Props) => {
+const AddImprovementDialog = ({ edit, enoughResources, index }: Props) => {
   const [resourceType, setResourceType] = useState("people");
 
   const submitHandler = (e: FormEvent) => {
@@ -133,62 +134,62 @@ const AddImprovementDialog = ({ edit, enoughResources }: Props) => {
       <form onSubmit={submitHandler}>
         <input
           type="radio"
-          id="people"
+          id={`people ${index}`}
           name="fav_language"
           value="people"
           onChange={(e) => setResourceType(e.target.value)}
         />
-        <label htmlFor="people">
+        <label htmlFor={`people ${index}`}>
           <i className="fa-solid fa-person"></i>
         </label>
         <input
           type="radio"
-          id="gold"
+          id={`gold ${index}`}
           name="fav_language"
           value="gold"
           onChange={(e) => setResourceType(e.target.value)}
         />
-        <label htmlFor="gold">
+        <label htmlFor={`gold ${index}`}>
           <i className="fa-solid fa-coins"></i>
         </label>
         <input
           type="radio"
-          id="food"
+          id={`food ${index}`}
           name="fav_language"
           value="food"
           onChange={(e) => setResourceType(e.target.value)}
         />
-        <label htmlFor="food">
+        <label htmlFor={`food ${index}`}>
           <i className="fa-solid fa-burger"></i>
         </label>
         <input
           type="radio"
-          id="ore"
+          id={`ore ${index}`}
           name="fav_language"
           value="ore"
           onChange={(e) => setResourceType(e.target.value)}
         />
-        <label htmlFor="ore">
+        <label htmlFor={`ore ${index}`}>
           <i className="fa-solid fa-hammer"></i>
         </label>
         <input
           type="radio"
-          id="weapon"
+          id={`weapon ${index}`}
           name="fav_language"
           value="weapon"
           onChange={(e) => setResourceType(e.target.value)}
         />
-        <label htmlFor="weapon">
+        <label htmlFor={`weapon ${index}`}>
           <i className="fa-solid fa-wand-sparkles"></i>
         </label>
         <input
           type="radio"
-          id="armor"
+          id={`armor ${index}`}
           name="fav_language"
           value="armour"
           onChange={(e) => setResourceType(e.target.value)}
         />
-        <label htmlFor="armor">
+        <label htmlFor={`armor ${index}`}>
           <i className="fa-solid fa-shield-halved"></i>
         </label>
         <button className="add">Add</button>

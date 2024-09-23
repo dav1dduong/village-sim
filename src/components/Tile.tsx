@@ -11,6 +11,7 @@ interface Props {
   edit: (tile: Improvement, index: number) => void;
   enoughResources: (cost: Resources) => boolean;
   upgradeOrDowngradeImprovement: (index: number, string: string) => void;
+  removeImprovement: (index: number) => void;
 }
 
 const Tile = ({
@@ -19,6 +20,7 @@ const Tile = ({
   edit,
   enoughResources,
   upgradeOrDowngradeImprovement,
+  removeImprovement,
 }: Props) => {
   const [add, setAdd] = useState(true);
   useEffect(() => {
@@ -34,6 +36,7 @@ const Tile = ({
         <AddImprovementDialog
           edit={(tile) => edit(tile, index)}
           enoughResources={enoughResources}
+          index={index}
         />
       ) : (
         <EditImprovementDialog
@@ -42,6 +45,7 @@ const Tile = ({
             upgradeOrDowngradeImprovement(index, string)
           }
           tile={tile}
+          removeImprovement={() => removeImprovement(index)}
         />
       )}
     </div>
