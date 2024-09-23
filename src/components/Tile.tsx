@@ -9,18 +9,16 @@ interface Props {
   tile: Improvement;
   index: number;
   edit: (tile: Improvement, index: number) => void;
-  resources: () => void;
   enoughResources: (cost: Resources) => boolean;
-  upgradeImprovement: (index: number) => void;
+  upgradeOrDowngradeImprovement: (index: number, string: string) => void;
 }
 
 const Tile = ({
   tile,
   index,
   edit,
-  resources,
   enoughResources,
-  upgradeImprovement,
+  upgradeOrDowngradeImprovement,
 }: Props) => {
   const [add, setAdd] = useState(true);
   useEffect(() => {
@@ -29,7 +27,6 @@ const Tile = ({
     }
   }, [tile]);
 
-  console.log(tile);
   return (
     <div className="Tile">
       <i className="fa-solid fa-person"></i>
@@ -40,9 +37,10 @@ const Tile = ({
         />
       ) : (
         <EditImprovementDialog
-          resources={resources}
           enoughResources={enoughResources}
-          upgradeImprovement={() => upgradeImprovement(index)}
+          upgradeOrDowngradeImprovement={(string: string) =>
+            upgradeOrDowngradeImprovement(index, string)
+          }
           tile={tile}
         />
       )}

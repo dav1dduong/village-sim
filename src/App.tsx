@@ -522,11 +522,12 @@ function App() {
     setTiles((prev) => {
       let copy = prev.slice(0);
       copy.splice(index, 1, tile);
+      editResources(copy);
       return copy;
     });
   };
   // function: that edits resources
-  const editResources = () => {
+  const editResources = (tiles: Improvement[]) => {
     const totalCosts = {
       people: 0,
       gold: 0,
@@ -546,30 +547,33 @@ function App() {
     };
 
     tiles.forEach((tile) => {
-      totalCosts.people += tile.cost.people;
-      totalCosts.gold += tile.cost.gold;
-      totalCosts.food += tile.cost.food;
-      totalCosts.ore += tile.cost.ore;
-      totalCosts.weapon += tile.cost.weapon;
-      totalCosts.armor += tile.cost.armor;
+      totalCosts.people += tile.cost.people * tile.level;
+      totalCosts.gold += tile.cost.gold * tile.level;
+      totalCosts.food += tile.cost.food * tile.level;
+      totalCosts.ore += tile.cost.ore * tile.level;
+      totalCosts.weapon += tile.cost.weapon * tile.level;
+      totalCosts.armor += tile.cost.armor * tile.level;
 
-      totalBenefits.people += tile.benefit.people;
-      totalBenefits.gold += tile.benefit.gold;
-      totalBenefits.food += tile.benefit.food;
-      totalBenefits.ore += tile.benefit.ore;
-      totalBenefits.weapon += tile.benefit.weapon;
-      totalBenefits.armor += tile.benefit.armor;
+      totalBenefits.people += tile.benefit.people * tile.level;
+      totalBenefits.gold += tile.benefit.gold * tile.level;
+      totalBenefits.food += tile.benefit.food * tile.level;
+      totalBenefits.ore += tile.benefit.ore * tile.level;
+      totalBenefits.weapon += tile.benefit.weapon * tile.level;
+      totalBenefits.armor += tile.benefit.armor * tile.level;
     });
 
     // Update the resources state based on costs and benefits
-    setResources((prevResources) => ({
-      people: prevResources.people - totalCosts.people + totalBenefits.people,
-      gold: prevResources.gold - totalCosts.gold + totalBenefits.gold,
-      food: prevResources.food - totalCosts.food + totalBenefits.food,
-      ore: prevResources.ore - totalCosts.ore + totalBenefits.ore,
-      weapon: prevResources.weapon - totalCosts.weapon + totalBenefits.weapon,
-      armor: prevResources.armor - totalCosts.armor + totalBenefits.armor,
-    }));
+    setResources((prevResources) => {
+      let copy = { ...prevResources };
+
+      copy.people = totalBenefits.people - totalCosts.people;
+      copy.gold = totalBenefits.gold - totalCosts.gold + 10;
+      copy.food = totalBenefits.food - totalCosts.food + 10;
+      copy.ore = totalBenefits.ore - totalCosts.ore;
+      copy.weapon = totalBenefits.weapon - totalCosts.weapon;
+      copy.armor = totalBenefits.armor - totalCosts.armor;
+      return copy;
+    });
   };
 
   const enoughResources = (cost: Resources): boolean => {
@@ -583,17 +587,29 @@ function App() {
       resources.armor >= cost.armor
     );
   };
-  const upgradeImprovement = (index: number) => {
+  const upgradeOrDowngradeImprovement = (index: number, string: string) => {
     setTiles((prev) => {
       let copy = prev.slice(0);
-      copy[index].level++;
+      console.log(string);
+      if (string === "upgrade") {
+        copy[index].level++;
+      } else if (string === "downgrade") {
+        copy[index].level--;
+        console.log(string);
+      }
+      editResources(copy);
       return copy;
     });
-    editResources();
   };
-  const downgradeImprovement = () => {};
-  const calculateResources = () => {
-    //calculate resources with benefits and costs
+  const removeImprovement = (index: number) => {
+    setTiles((prev) => {
+      let copy = prev.slice(0);
+      if (copy[index].level === 1) {
+        copy.splice(index, 1);
+      }
+      editResources(copy);
+      return copy;
+    });
   };
   console.log(tiles, resources);
   return (
@@ -601,9 +617,8 @@ function App() {
       <Map
         tiles={tiles}
         edit={editTile}
-        resources={editResources}
         enoughResources={enoughResources}
-        upgradeImprovement={upgradeImprovement}
+        upgradeOrDowngradeImprovement={upgradeOrDowngradeImprovement}
       />
       <ResourcesView resources={resources} />
     </>

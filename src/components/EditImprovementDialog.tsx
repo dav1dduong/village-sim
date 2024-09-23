@@ -4,41 +4,38 @@ import Resources from "../models/Resources";
 import "./EditImprovementDialog.css";
 
 interface Props {
-  resources: () => void;
   enoughResources: (cost: Resources) => boolean;
   tile: Improvement;
-  upgradeImprovement: () => void;
+  upgradeOrDowngradeImprovement: (string: string) => void;
 }
 
 const EditImprovementDialog = ({
-  resources,
   enoughResources,
   tile,
-  upgradeImprovement,
+  upgradeOrDowngradeImprovement,
 }: Props) => {
-  const [enough, setEnough] = useState(false);
-  const checkUpgrade = () => {
+  const checkOnUpgrade = () => {
     if (enoughResources(tile.cost)) {
-      setEnough(true);
+      upgradeOrDowngradeImprovement("upgrade");
     }
   };
-  const handleClick = () => {
-    checkUpgrade();
-    if (enough) {
-      upgradeImprovement();
+  const checkOnDowngrade = () => {
+    if (tile.level > 1) {
+      upgradeOrDowngradeImprovement("downgrade");
     }
   };
+  console.log(tile);
   return (
     <div className="EditImprovementDialog">
       <div className="btn-container">
         {
-          <button onClick={handleClick}>
+          <button onClick={() => checkOnUpgrade()}>
             Upgrade
           </button> /*We start adding buttons EX. Upgrade, Downgrade, Close, etc. */
         }
-        {<button onClick={resources}>Downgrade</button>}
-        {<button onClick={resources}>Remove</button>}
-        {<button onClick={resources}>Close</button>}
+        {<button onClick={() => checkOnDowngrade()}>Downgrade</button>}
+        {<button onClick={() => {}}>Remove</button>}
+        {<button onClick={() => {}}>Close</button>}
       </div>
     </div>
   );

@@ -6,17 +6,15 @@ import Tile from "./Tile";
 interface Props {
   tiles: Improvement[];
   edit: (tile: Improvement, index: number) => void;
-  resources: () => void;
   enoughResources: (cost: Resources) => boolean;
-  upgradeImprovement: (index: number) => void;
+  upgradeOrDowngradeImprovement: (index: number, string: string) => void;
 }
 
 const Map = ({
   tiles,
   edit,
-  resources,
   enoughResources,
-  upgradeImprovement,
+  upgradeOrDowngradeImprovement,
 }: Props) => {
   return (
     <div className="Map">
@@ -28,9 +26,8 @@ const Map = ({
               tile={tile}
               index={i}
               edit={edit}
-              resources={resources}
               enoughResources={enoughResources}
-              upgradeImprovement={upgradeImprovement}
+              upgradeOrDowngradeImprovement={upgradeOrDowngradeImprovement}
             />
           );
         })}
