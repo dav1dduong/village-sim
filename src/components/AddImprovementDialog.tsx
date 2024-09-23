@@ -48,6 +48,7 @@ const AddImprovementDialog = ({ edit, enoughResources }: Props) => {
     ) {
       replacementTile.cost.food = 5;
       replacementTile.benefit.people = 1;
+      edit(replacementTile);
     }
     if (
       resourceType === "gold" &&
@@ -63,6 +64,7 @@ const AddImprovementDialog = ({ edit, enoughResources }: Props) => {
       replacementTile.cost.armor = 1;
       replacementTile.cost.weapon = 1;
       replacementTile.benefit.gold = 2;
+      edit(replacementTile);
     }
     if (
       resourceType === "food" &&
@@ -77,6 +79,7 @@ const AddImprovementDialog = ({ edit, enoughResources }: Props) => {
     ) {
       replacementTile.cost.gold = 5;
       replacementTile.benefit.food = 1;
+      edit(replacementTile);
     }
     if (
       resourceType === "ore" &&
@@ -91,6 +94,7 @@ const AddImprovementDialog = ({ edit, enoughResources }: Props) => {
     ) {
       replacementTile.cost.people = 1;
       replacementTile.benefit.ore = 1;
+      edit(replacementTile);
     }
     if (
       resourceType === "weapon" &&
@@ -105,6 +109,7 @@ const AddImprovementDialog = ({ edit, enoughResources }: Props) => {
     ) {
       replacementTile.cost.ore = 1;
       replacementTile.benefit.weapon = 1;
+      edit(replacementTile);
     }
     if (
       resourceType === "armor" &&
@@ -119,8 +124,8 @@ const AddImprovementDialog = ({ edit, enoughResources }: Props) => {
     ) {
       replacementTile.cost.ore = 1;
       replacementTile.benefit.armor = 1;
+      edit(replacementTile);
     }
-    edit(replacementTile);
   };
 
   return (

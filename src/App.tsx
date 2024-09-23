@@ -584,7 +584,12 @@ function App() {
     );
   };
   const upgradeImprovement = (index: number) => {
-    // setTiles(() => {});
+    setTiles((prev) => {
+      let copy = prev.slice(0);
+      copy[index].level++;
+      return copy;
+    });
+    editResources();
   };
   const downgradeImprovement = () => {};
   const calculateResources = () => {
@@ -598,6 +603,7 @@ function App() {
         edit={editTile}
         resources={editResources}
         enoughResources={enoughResources}
+        upgradeImprovement={upgradeImprovement}
       />
       <ResourcesView resources={resources} />
     </>

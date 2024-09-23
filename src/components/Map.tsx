@@ -8,9 +8,16 @@ interface Props {
   edit: (tile: Improvement, index: number) => void;
   resources: () => void;
   enoughResources: (cost: Resources) => boolean;
+  upgradeImprovement: (index: number) => void;
 }
 
-const Map = ({ tiles, edit, resources, enoughResources }: Props) => {
+const Map = ({
+  tiles,
+  edit,
+  resources,
+  enoughResources,
+  upgradeImprovement,
+}: Props) => {
   return (
     <div className="Map">
       <div>
@@ -23,6 +30,7 @@ const Map = ({ tiles, edit, resources, enoughResources }: Props) => {
               edit={edit}
               resources={resources}
               enoughResources={enoughResources}
+              upgradeImprovement={upgradeImprovement}
             />
           );
         })}
