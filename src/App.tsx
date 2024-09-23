@@ -518,7 +518,9 @@ function App() {
     armor: 10,
   });
   // function: that edits a tile
-  const editTile = (tile, index) => {};
+  const editTile = (tile, index) => {
+    
+  };
   // function: that edits resources
   const editResources = () => {};
   return (
