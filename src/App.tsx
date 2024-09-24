@@ -633,17 +633,30 @@ function App() {
   console.log(tiles, resources);
   return (
     <>
-      <div className="map-container">
-        <Map
-          tiles={tiles}
-          edit={editTile}
-          enoughResources={enoughResources}
-          upgradeOrDowngradeImprovement={upgradeOrDowngradeImprovement}
-          removeImprovement={removeImprovement}
-        />
-      </div>
-      <div className="resources-container">
-        <ResourcesView resources={resources} />
+      <div className="main-ctn">
+        <p className="title">RPG Sim</p>
+        <div className="map-container">
+          <Map
+            tiles={tiles}
+            edit={editTile}
+            enoughResources={enoughResources}
+            upgradeOrDowngradeImprovement={upgradeOrDowngradeImprovement}
+            removeImprovement={removeImprovement}
+          />
+        </div>
+        <div className="resources-container">
+          <ul>
+            <ResourcesView resources={resources} />
+          </ul>
+        </div>
+        <ul className="conversion">
+          <li>1 People = 5 Food</li>
+          <li>2 Gold = 1 Weapon/Armor</li>
+          <li>1 Food = 2 Gold</li>
+          <li>1 Ore = 1 People</li>
+          <li>1 Weapon = 1 Ore</li>
+          <li>1 Armor = 1 Ore</li>
+        </ul>
       </div>
     </>
   );

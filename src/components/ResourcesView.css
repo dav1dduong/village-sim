@@ -1,0 +1,16 @@
+.ResourcesView {
+  border: 1px black solid;
+  width: 120px;
+  padding: 20px;
+  list-style-type: none;
+}
+
+.icon-ctn {
+  display: flex;
+  align-items: center;
+}
+
+.fa-solid {
+  width: 20px;
+  height: auto;
+}

@@ -6,12 +6,13 @@ interface Props {
 }
 
 const ResourceLine = ({ name, resource }: Props) => {
+  const capitalizeFirstLetter = (string: string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
   return (
-    <div className="ResourceLine">
-      <p>
-        {name} : {resource}
-      </p>
-    </div>
+    <p className="ResourceLine">
+      {capitalizeFirstLetter(name)} : {resource}
+    </p>
   );
 };
 

@@ -1,4 +1,5 @@
 .Map {
   display: flex;
   flex-direction: row;
+  width: 760px;
 }

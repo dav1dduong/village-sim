@@ -23,31 +23,43 @@ const Tile = ({
   removeImprovement,
 }: Props) => {
   const [add, setAdd] = useState(true);
+  const [show, setShow] = useState(false);
   useEffect(() => {
     if (tile.type !== "") {
       setAdd(false);
+    } else {
+      setAdd(true);
     }
   }, [tile]);
+  console.log(show);
 
   return (
-    <div className="Tile">
-      <i className="fa-solid fa-person"></i>
-      {add ? (
-        <AddImprovementDialog
-          edit={(tile) => edit(tile, index)}
-          enoughResources={enoughResources}
-          index={index}
-        />
-      ) : (
-        <EditImprovementDialog
-          enoughResources={enoughResources}
-          upgradeOrDowngradeImprovement={(string: string) =>
-            upgradeOrDowngradeImprovement(index, string)
-          }
-          tile={tile}
-          removeImprovement={() => removeImprovement(index)}
-        />
-      )}
+    <div
+      className={`Tile${show ? " disabled" : ""}`}
+      onClick={() => {
+        console.log("test");
+      }}
+    >
+      <div className="Outside">
+        {add ? (
+          <AddImprovementDialog
+            edit={(tile) => edit(tile, index)}
+            enoughResources={enoughResources}
+            index={index}
+            closeModule={() => {}}
+          />
+        ) : (
+          <EditImprovementDialog
+            enoughResources={enoughResources}
+            upgradeOrDowngradeImprovement={(string: string) =>
+              upgradeOrDowngradeImprovement(index, string)
+            }
+            closeModule={() => {}}
+            tile={tile}
+            removeImprovement={() => removeImprovement(index)}
+          />
+        )}
+      </div>
     </div>
   );
 };

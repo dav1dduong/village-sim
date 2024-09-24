@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Improvement from "../models/Improvement";
 import Resources from "../models/Resources";
 import "./Map.css";
@@ -18,23 +19,22 @@ const Map = ({
   upgradeOrDowngradeImprovement,
   removeImprovement,
 }: Props) => {
+  const [selectedIndex, setSelectedIndex] = useState(-1);
   return (
     <div className="Map">
-      <div>
-        {tiles.map((tile, i) => {
-          return (
-            <Tile
-              key={i}
-              tile={tile}
-              index={i}
-              edit={edit}
-              enoughResources={enoughResources}
-              upgradeOrDowngradeImprovement={upgradeOrDowngradeImprovement}
-              removeImprovement={removeImprovement}
-            />
-          );
-        })}
-      </div>
+      {tiles.map((tile, i) => {
+        return (
+          <Tile
+            key={i}
+            tile={tile}
+            index={i}
+            edit={edit}
+            enoughResources={enoughResources}
+            upgradeOrDowngradeImprovement={upgradeOrDowngradeImprovement}
+            removeImprovement={removeImprovement}
+          />
+        );
+      })}
     </div>
   );
 };

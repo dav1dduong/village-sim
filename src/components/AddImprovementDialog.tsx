@@ -7,8 +7,14 @@ interface Props {
   edit: (tile: Improvement) => void;
   enoughResources: (cost: Resources) => boolean;
   index: number;
+  closeModule: () => void;
 }
-const AddImprovementDialog = ({ edit, enoughResources, index }: Props) => {
+const AddImprovementDialog = ({
+  edit,
+  enoughResources,
+  index,
+  closeModule,
+}: Props) => {
   const [resourceType, setResourceType] = useState("people");
 
   const submitHandler = (e: FormEvent) => {
@@ -78,7 +84,7 @@ const AddImprovementDialog = ({ edit, enoughResources, index }: Props) => {
         armor: 0,
       })
     ) {
-      replacementTile.cost.gold = 5;
+      replacementTile.cost.gold = 2;
       replacementTile.benefit.food = 1;
       edit(replacementTile);
     }
@@ -127,6 +133,7 @@ const AddImprovementDialog = ({ edit, enoughResources, index }: Props) => {
       replacementTile.benefit.armor = 1;
       edit(replacementTile);
     }
+    closeModule();
   };
 
   return (
